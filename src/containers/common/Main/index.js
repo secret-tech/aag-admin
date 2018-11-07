@@ -1,32 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Switch, withRouter } from 'react-router-dom';
 
-import { counterIncrement, counterDecrement } from '../../../redux/ducks/common/counter';
+import CustomRoute from '../../../components/common/CustomRoute';
+import AppWrapper from '../AppWrapper';
+import AuthWrapper from '../AuthWrapper';
 
-import s from './styles.module.css';
+import * as routes from '../../../routes';
 
-const Main = (props) => {
+const Main = () => {
   return (
-    <div className={s.hello}>
-      <span className={s.green}>Hello </span>
-      <span className={s.red}>fckn </span>
-      <span className={s.green}>world</span>
-
-      <div>
-        <button type="button" onClick={() => props.counterIncrement()}>INCREMENT THAT SHIT</button>
-        <span>{props.counter}</span>
-        <button type="button" onClick={() => props.counterDecrement()}>DECREMENT THAT SHIT</button>
-      </div>
-    </div>
+    <Switch>
+      <CustomRoute path={routes.AUTH} redirectRoute={routes.USERS} component={AuthWrapper}/>
+      <CustomRoute reqToken redirectRoute={routes.SIGN_IN} component={AppWrapper}/>
+    </Switch>
   );
 }
 
-export default connect(
-  (state) => ({
-    counter: state.common.counter
-  }),
-  {
-    counterIncrement,
-    counterDecrement
-  }
-)(Main);
+export default withRouter(Main);

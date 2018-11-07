@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router'
 
-import store from './redux/configureStore';
+import store, { history } from './redux/configureStore';
 
 import Main from './containers/common/Main';
 
@@ -11,7 +12,9 @@ import * as serviceWorker from './assets/workers/serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Main/>
+    <ConnectedRouter history={history}>
+      <Main/>
+    </ConnectedRouter>
   </Provider>, 
   document.getElementById('root')
 );
