@@ -8,6 +8,8 @@ import store, { history } from './redux/configureStore';
 import Main from './containers/common/Main';
 
 import './assets/css/main.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
 import * as serviceWorker from './assets/workers/serviceWorker';
 
 ReactDOM.render(
