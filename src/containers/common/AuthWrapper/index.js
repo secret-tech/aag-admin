@@ -8,7 +8,6 @@ import * as routes from '../../../routes';
 const AuthWrapper = () => {
   return (
     <div>
-      <div>AUTH SPACE</div>
       <Switch>
         <Route exact path={routes.SIGN_IN} component={SignIn}/>
         
