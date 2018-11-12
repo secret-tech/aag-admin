@@ -7934,6 +7934,11 @@ react-popper@^1.0.0:
     typed-styles "^0.0.5"
     warning "^3.0.0"
 
+react-redux-promise-listener@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-redux-promise-listener/-/react-redux-promise-listener-1.0.0.tgz#6dc3cbd0d1ec773cbcba246592f8ec1e6599f5ad"
+  integrity sha512-OjUpreMXexbWwxxiwk5J1IcbtZ41WsDv0EHuC0t+bOWAWM+nwtwLIq/ZwAVDbh0zamcZkK/XfG9yKWGXxZXzxA==
+
 react-redux@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.1.0.tgz#948b1e2686473d1999092bcfb32d0dc43d33f667"
@@ -8126,6 +8131,11 @@ recursive-readdir@2.2.2:
   integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
   dependencies:
     minimatch "3.0.4"
+
+redux-promise-listener@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/redux-promise-listener/-/redux-promise-listener-1.1.0.tgz#cdd06108ae46423ee51971d52d56119342f616f2"
+  integrity sha512-sdSVjDPdorGULkcqb+nbNTywWENvthe+1LDMLvFddxD83btlYHZv+8OaYelxD3v5XA1vlPlq26nb5msEOmk/Zw==
 
 redux-saga@^0.16.2:
   version "0.16.2"
