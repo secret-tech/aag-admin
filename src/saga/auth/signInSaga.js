@@ -1,14 +1,20 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
 
+import api from '../../utils/api';
+import { error } from '../../utils/toaster';
+import { setToken } from '../../utils/auth';
 import { signIn } from '../../redux/ducks/auth/signIn';
 
 
 function* signInIterator({ payload }) {
   try {
-    yield call(console.log, '[POST] request to $HOST/sign-in', payload);
+    const { data } = yield call(api.post, '/tenant/login', payload, { suppressAuth: false });
+    yield call(setToken, data.accessToken);
+    yield call(console.log, data);
     yield put(signIn.success());
   } catch (e) {
-    yield call(console.log, '[ERR] shit happend at $HOST/sign-in', e);
+    yield call(console.log, '[ERROR] at signInSaga', e);
+    yield call(error, e.message);
     yield put(signIn.failure());
   }
 }

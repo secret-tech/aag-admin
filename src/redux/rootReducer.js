@@ -3,7 +3,9 @@ import { connectRouter } from 'connected-react-router';
 
 import counter from './ducks/common/counter';
 
+import signUp from './ducks/auth/signUp';
 import signIn from './ducks/auth/signIn';
+import signOut from './ducks/auth/signOut';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -13,6 +15,8 @@ export default (history) => combineReducers({
   }),
 
   auth: combineReducers({
-    signIn
+    signUp,
+    signIn,
+    signOut
   })
 });

@@ -2,6 +2,7 @@ export const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), null);
 
 const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
+const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
 
 export const required = (value) => 
   (value ? null : 'Required');
@@ -17,3 +18,6 @@ export const maxLength = (max) => (value) =>
 
 export const mustBeEmail = (value) => 
   (EMAIL_REGEXP.test(value) ? null : 'Email incorrect');
+
+export const mustBeValidPassword = (value) =>
+  (PASSWORD_REGEXP.test(value) ? null : 'Password incorrect')

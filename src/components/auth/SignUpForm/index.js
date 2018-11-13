@@ -6,23 +6,23 @@ import { FormGroup, InputGroup, Button, Tooltip, Intent } from '@blueprintjs/cor
 import PasswordInput from '../../../components/_forms/PasswordInput';
 
 import { promiseListener } from '../../../redux/configureStore';
-import { signIn } from '../../../redux/ducks/auth/signIn';
-import { composeValidators, required, mustBeEmail, minLength, maxLength } from '../../../utils/formValidators';
+import { signUp } from '../../../redux/ducks/auth/signUp';
+import { composeValidators, required, mustBeEmail, mustBeValidPassword, minLength, maxLength } from '../../../utils/formValidators';
 
 
-const SignInForm = () => {
+const SignUpForm = () => {
   return (
     <MakeAsyncFunction
       listener={promiseListener}
-      start={signIn.REQUEST}
-      resolve={signIn.SUCCESS}
-      reject={signIn.FAILURE}>
+      start={signUp.REQUEST}
+      resolve={signUp.SUCCESS}
+      reject={signUp.FAILURE}>
       {(onSubmit) => (
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, submitting, pristine, invalid }) => (
             <form onSubmit={handleSubmit}>
-              <Field 
+              <Field
                 name="email" 
                 validate={composeValidators(required, mustBeEmail)}>
                 {({ input, meta }) => (
@@ -44,9 +44,9 @@ const SignInForm = () => {
                 )}
               </Field>
     
-              <Field 
+              <Field
                 name="password" 
-                validate={composeValidators(required, minLength(8), maxLength(18))}>
+                validate={composeValidators(required, mustBeValidPassword, minLength(8), maxLength(18))}>
                 {({ input, meta }) => (
                   <FormGroup
                     intent={meta.touched && meta.error ? Intent.DANGER : Intent.NONE}>
@@ -65,12 +65,12 @@ const SignInForm = () => {
                 )}
               </Field>
     
-              <Button
+              <Button 
                 type="submit"
                 fill
                 large
                 minimal
-                text="Sign in"
+                text="Sign up"
                 rightIcon="arrow-right"
                 intent={Intent.PRIMARY}
                 loading={submitting}
@@ -82,4 +82,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

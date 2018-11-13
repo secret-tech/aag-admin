@@ -1,8 +1,8 @@
 import { createAsyncAction, createReducer } from '../../../utils/actions';
 
-export const SIGN_IN = 'auth/signIn/SIGN_IN';
+export const SIGN_OUT = 'auth/signOut/SIGN_OUT';
 
-export const signIn = createAsyncAction(SIGN_IN);
+export const signOut = createAsyncAction(SIGN_OUT);
 
 const initialState = {};
 
