@@ -1,0 +1,21 @@
+.buttons {
+  margin: 0 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search {
+  display: inline-block;
+}
+
+.table {
+  width: 100%;
+}
+
+.controls {
+  opacity: 0;
+}
+
+.table tr:hover .controls {
+  opacity: 1;
+}

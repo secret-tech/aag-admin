@@ -7,6 +7,7 @@ import signInSaga from './auth/signInSaga';
 import signOutSaga from './auth/signOutSaga';
 
 import usersSaga from './dashboard/usersSaga';
+import newUserSaga from './dashboard/newUserSaga';
 
 export default function* () {
   yield all([
@@ -15,6 +16,7 @@ export default function* () {
     fork(signInSaga),
     fork(signOutSaga),
 
-    fork(usersSaga)
+    fork(usersSaga),
+    fork(newUserSaga)
   ]);
 }

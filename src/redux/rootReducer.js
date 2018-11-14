@@ -8,6 +8,7 @@ import signIn from './ducks/auth/signIn';
 import signOut from './ducks/auth/signOut';
 
 import users from './ducks/dashboard/users';
+import newUser from './ducks/dashboard/newUser';
 import userPopup from './ducks/dashboard/userPopup';
 
 export default (history) => combineReducers({
@@ -25,6 +26,7 @@ export default (history) => combineReducers({
 
   dashboard: combineReducers({
     users,
+    newUser,
     userPopup
   })
 });

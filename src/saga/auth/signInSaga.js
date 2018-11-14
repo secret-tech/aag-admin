@@ -13,7 +13,7 @@ function* signInIterator({ payload }) {
     yield call(console.log, data);
     yield put(signIn.success());
   } catch (e) {
-    yield call(console.log, '[ERROR] at signInSaga', e);
+    yield call(console.log, '[ERROR] at signInSaga', e.message);
     yield call(error, e.message);
     yield put(signIn.failure());
   }
