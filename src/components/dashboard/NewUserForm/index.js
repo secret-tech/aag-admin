@@ -10,7 +10,7 @@ import { createNewUser } from '../../../redux/ducks/dashboard/newUser';
 import { composeValidators, required, mustBeEmail, minLength, maxLength } from '../../../utils/formValidators';
 
 
-const NewUserForm = () => {
+const NewUserForm = (props) => {
   return (
     <MakeAsyncFunction
       listener={promiseListener}
@@ -20,6 +20,7 @@ const NewUserForm = () => {
       {(onSubmit) => (
         <Form
           onSubmit={onSubmit}
+          initialValues={props.initialValues}
           render={({ handleSubmit, submitting, pristine, invalid }) => (
             <form onSubmit={handleSubmit}>
               <Field 
@@ -143,8 +144,7 @@ const NewUserForm = () => {
                 type="submit"
                 fill
                 large
-                text="Create"
-                icon="plus"
+                text="Submit"
                 intent={Intent.PRIMARY}
                 loading={submitting}
                 disabled={invalid || pristine}/>
