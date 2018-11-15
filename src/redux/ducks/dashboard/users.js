@@ -6,7 +6,9 @@ export const fetchUsers = createAsyncAction(FETCH_USERS);
 
 const initialState = {
   loading: false,
-  users: []
+  users: [],
+  nextCursor: '',
+  prevCursor: ''
 };
 
 export default createReducer({
@@ -17,7 +19,7 @@ export default createReducer({
 
   [fetchUsers.SUCCESS]: (state, { payload }) => ({
     ...state,
-    users: payload,
+    ...payload,
     loading: false
   }),
 

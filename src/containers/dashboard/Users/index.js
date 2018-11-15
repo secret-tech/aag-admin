@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HTMLTable, Button, Tooltip, Intent } from '@blueprintjs/core';
+import { HTMLTable, ButtonGroup, Button, Tooltip, InputGroup, Intent } from '@blueprintjs/core';
 import { format } from 'date-fns';
 
 import NewUserPopup from '../NewUserPopup';
 import EditUserPopup from '../EditUserPopup';
 import UserPopup from '../UserPopup';
-import SearchForm from '../../../components/dashboard/SearchForm';
 
 import { fetchUsers } from '../../../redux/ducks/dashboard/users';
 import { openNewUserPopup } from '../../../redux/ducks/dashboard/newUser';
@@ -15,38 +14,44 @@ import { openEditUserPopup } from '../../../redux/ducks/dashboard/editUser';
 
 import s from './styles.module.css';
 
-const USERS = [
-  {
-    id: '0x0',
-    email: 'amazing.space.invader@gmail.com',
-    login: 'amazing.space.invader_gmail.com',
-    regdate: 1542214409000,
-    lastActivity: 1542214434000,
-    sub: 'subsub',
-    scope: 'admin'
-  },
-  {
-    id: '0x1',
-    email: 'anotheremail@ggg.com',
-    login: 'anotheremail_ggg.com',
-    regdate: 1542214488000,
-    lastActivity: 1542214494000,
-    sub: 'subsub'
-  },
-  {
-    id: '0x2',
-    email: 'yoyoyo@yo.yo',
-    login: 'yoyoyo_yo.yo',
-    regdate: 1542214523000,
-    lastActivity: 1542214529000,
-    sub: 'subsub',
-    scope: 'advisor'
-  },
-];
-
 class Users extends Component {
+  constructor(props) {
+    super(props);
+
+    const params = new URLSearchParams(this.props.location.search);
+
+    this.state = {
+      q: params.get('q') || '',
+      cursor: params.get('cursor') || ''
+    };
+
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handlePaginate = this.handlePaginate.bind(this);
+  }
+
   componentWillMount() {
-    this.props.fetchUsers();
+    const { q, cursor } = this.state;
+    this.props.fetchUsers({ q, cursor });
+  }
+
+  handleSearchChange(e) {
+    this.setState({ q: e.target.value || '' });
+  }
+
+  handleSearch(e) {
+    e.preventDefault();
+    const { q } = this.state;
+
+    const searchParams = new URLSearchParams();
+    searchParams.set('q', q);
+
+    this.props.history.push(`?${searchParams.toString()}`);
+    this.props.fetchUsers({ q });
+  }
+
+  handlePaginate() {
+    this.props.fetchUsers({ cursor: this.props.nextCursor });
   }
 
   render() {
@@ -82,23 +87,42 @@ class Users extends Component {
     return (
       <>
         <div className={s.buttons}>
-          <div className={s.create}>
+          <div className={s.left}>
             <Button
               intent={Intent.SUCCESS}
               text="Create new user"
               icon="plus"
               onClick={() => this.props.openNewUserPopup()}/>
+
+            <Button
+              minimal
+              text="Next page"
+              icon="arrow-right"
+              onClick={() => this.handlePaginate()}/>
           </div>
 
           <div className={s.search}>
-            <SearchForm/>
+            <form onSubmit={this.handleSearch}>
+              <InputGroup
+                type="search" 
+                placeholder="Enter login to search"
+                value={this.state.q}
+                onChange={this.handleSearchChange}
+                rightElement={(
+                  <Button
+                    minimal
+                    type="submit"
+                    icon="search"/>
+                )}/>
+            </form>
           </div>
         </div>
 
         <HTMLTable interactive className={s.table}>
           <thead>
             <tr>
-              <th>email</th>
+              <th className={s.wide}>login</th>
+              <th className={s.wide}>email</th>
               <th>reg date</th>
               <th>last activity</th>
               <th>sub</th>
@@ -107,9 +131,10 @@ class Users extends Component {
             </tr>
           </thead>
           <tbody>
-            {USERS.map((user) => (
+            {this.props.users.map((user) => (
               <tr key={user.id}>
-                <td>{user.email}</td>
+                <td className={s.wide} alt={user.login}>{user.login}</td>
+                <td className={s.wide} alt={user.email}>{user.email}</td>
                 <td>{format(user.regdate, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{format(user.lastActivity, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{user.sub}</td>

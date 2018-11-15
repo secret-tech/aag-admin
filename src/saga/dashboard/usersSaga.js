@@ -7,9 +7,12 @@ import { fetchUsers } from '../../redux/ducks/dashboard/users';
 
 function* fetchUsersIterator({ payload }) {
   try {
-    const { data } = yield call(api.get, '/user', {}, { suppressAuth: true });
-    yield call(console.log, data);
-    yield put(fetchUsers.success());
+    const params = Object.keys(payload).map((key) => payload[key]
+      ? `${encodeURIComponent(key)}=${encodeURIComponent(payload[key])}`
+      : null).join('&');
+
+    const { data } = yield call(api.get, `/user?${params}`, {}, { suppressAuth: true });
+    yield put(fetchUsers.success(data));
   } catch (e) {
     yield call(console.log, '[ERROR] at signInSaga', e);
     yield call(error, e.message);
