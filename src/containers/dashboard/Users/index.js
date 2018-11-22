@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HTMLTable, ButtonGroup, Button, Tooltip, InputGroup, Intent } from '@blueprintjs/core';
+import { HTMLTable, Button, Tooltip, InputGroup, Intent } from '@blueprintjs/core';
 import { format } from 'date-fns';
 
 import NewUserPopup from '../NewUserPopup';
@@ -22,7 +22,7 @@ class Users extends Component {
 
     this.state = {
       q: params.get('q') || '',
-      cursor: params.get('cursor') || ''
+      cursor: params.get('cursor') || '0'
     };
 
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -84,6 +84,8 @@ class Users extends Component {
       </div>
     );
 
+    console.log(this.props);
+
     return (
       <>
         <div className={s.buttons}>
@@ -135,7 +137,7 @@ class Users extends Component {
               <tr key={user.id}>
                 <td className={s.wide} alt={user.login}>{user.login}</td>
                 <td className={s.wide} alt={user.email}>{user.email}</td>
-                <td>{format(user.regdate, 'DD MMM YY | HH:mm:ss') || ''}</td>
+                <td>{format(user.registrationDate, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{format(user.lastActivity, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{user.sub}</td>
                 <td>{user.scope || ''}</td>

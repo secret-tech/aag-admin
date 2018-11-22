@@ -17,11 +17,14 @@ export default createReducer({
     loading: true
   }),
 
-  [fetchUsers.SUCCESS]: (state, { payload }) => ({
-    ...state,
-    ...payload,
-    loading: false
-  }),
+  [fetchUsers.SUCCESS]: (state, { payload }) => {
+    console.log('merge users', payload);
+    return ({
+      ...state,
+      ...payload,
+      loading: false
+    })
+  },
 
   [fetchUsers.FAILURE]: (state) => ({
     loading: false

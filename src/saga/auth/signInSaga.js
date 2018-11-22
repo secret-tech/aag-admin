@@ -10,7 +10,6 @@ function* signInIterator({ payload }) {
   try {
     const { data } = yield call(api.post, '/tenant/login', payload, { suppressAuth: false });
     yield call(setToken, data.accessToken);
-    yield call(console.log, data);
     yield put(signIn.success());
   } catch (e) {
     yield call(console.log, '[ERROR] at signInSaga', e.message);
