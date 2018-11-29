@@ -7,7 +7,6 @@ import NewUserForm from '../../../components/dashboard/NewUserForm';
 import { closeEditUserPopup } from '../../../redux/ducks/dashboard/editUser';
 
 const EditUserPopup = (props) => {
-  console.log(props);
   return (
     <Dialog
       className="bp3-dark"

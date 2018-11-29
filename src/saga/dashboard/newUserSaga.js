@@ -8,7 +8,8 @@ import { closeEditUserPopup } from '../../redux/ducks/dashboard/editUser';
 
 function* createNewUserIterator({ payload }) {
   try {
-    yield call(api.post, '/user', payload, { suppressAuth: true });
+    yield call(console.log, { ...payload, scope: JSON.parse(payload.scope) });
+    yield call(api.post, '/user', { ...payload, scope: JSON.parse(payload.scope) }, { suppressAuth: true });
     yield put(createNewUser.success());
     yield put(closeNewUserPopup());
     yield put(closeEditUserPopup());

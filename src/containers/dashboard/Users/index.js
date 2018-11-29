@@ -62,10 +62,10 @@ class Users extends Component {
             icon="edit"
             small
             minimal
-            onClick={() => this.props.openEditUserPopup(user)}/>
+            onClick={() => this.props.openEditUserPopup({ ...user, scope: JSON.stringify(user.scope) })}/>
         </Tooltip>
 
-        <Tooltip content="Invalidate user's jwt">
+        {/* <Tooltip content="Invalidate user's jwt">
           <Button
             icon="flame"
             small
@@ -80,7 +80,7 @@ class Users extends Component {
             minimal
             intent={Intent.DANGER}
             onClick={() => console.log('Delete user')}/>
-        </Tooltip>
+        </Tooltip> */}
       </div>
     );
 
