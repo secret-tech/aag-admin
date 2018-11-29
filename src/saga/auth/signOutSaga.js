@@ -1,9 +1,12 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import api from '../../utils/api';
 import { error } from '../../utils/toaster';
 import { getToken, removeToken } from '../../utils/auth';
 import { signOut } from '../../redux/ducks/auth/signOut';
+
+import * as routes from '../../routes';
 
 
 function* signOutIterator({ payload }) {
@@ -12,6 +15,7 @@ function* signOutIterator({ payload }) {
     yield call(api.post, '/tenant/logout', { token }, { suppressAuth: false });
     yield call(removeToken);
     yield put(signOut.success());
+    yield put(push(routes.SIGN_IN));
   } catch (e) {
     yield call(console.log, '[ERROR] at signOutSaga', e);
     yield call(error, e.message);

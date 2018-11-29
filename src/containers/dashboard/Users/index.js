@@ -140,7 +140,7 @@ class Users extends Component {
                 <td>{format(user.registrationDate, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{format(user.lastActivity, 'DD MMM YY | HH:mm:ss') || ''}</td>
                 <td>{user.sub}</td>
-                <td>{user.scope || ''}</td>
+                <td>{JSON.stringify(user.scope) || 'undefined'}</td>
                 <td>{renderControls(user)}</td>
               </tr>
             ))}

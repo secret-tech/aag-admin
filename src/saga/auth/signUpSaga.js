@@ -1,5 +1,5 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router'
+import { push } from 'connected-react-router';
 
 import api from '../../utils/api';
 import { setToken } from '../../utils/auth';
